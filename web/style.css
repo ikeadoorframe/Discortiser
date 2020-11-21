@@ -9,6 +9,11 @@ div.everything{
   display:flex;
 }
 
+div.leftside{
+  margin: 0px;
+  width: 140px;
+}
+
 form {
   margin: 15px;
   margin-bottom: 5px;
@@ -58,16 +63,18 @@ input {
   border-bottom: 2px solid #c09ad9;
   box-shadow: none;
 }
+
 input:focus{
   border-bottom: 2px solid #c09ad9;
 }
+
 input:focus~label,
 input:valid~label {
   font-size: 14px;
   top: -24px;
   color: #d3d3d3;
-
 }
+
 div.buttons{
   user-select: none;
   position: absolute;
@@ -76,22 +83,6 @@ div.buttons{
   margin-left: 10px;
   width: 280px;
   user-select: none;
-}
-
-.startbutton{
-  color: #d3d3d3;
-  outline: 0;
-  margin: 5px;
-  margin-top: 10px;
-  height: 41px;
-  width: 245px;
-  background-color: transparent;
-  border: 3px solid #c09ad9;
-  border-radius: 10px;
-  font-family: "Courier New";
-  font-size: 18px;
-  font-weight: 520;
-  transition-duration: 0.3s;
 }
 
 .configbuttons{
@@ -114,33 +105,85 @@ div.buttons{
   user-select: none;
 }
 
+.startbutton{
+  color: #d3d3d3;
+  outline: 0;
+  margin: 5px;
+  margin-top: 10px;
+  height: 41px;
+  width: 245px;
+  background-color: transparent;
+  border: 3px solid #c09ad9;
+  border-radius: 10px;
+  font-family: "Courier New";
+  font-size: 18px;
+  font-weight: 520;
+  transition-duration: 0.3s;
+}
+
 .startbutton:hover{
   background-color: rgba(255, 255, 255, 0.2);
   user-select: none;
 }
 
+div.middle{
+  position: relative;
+  margin-top: 89px;
+  margin-left: 4px;
+  user-select: none;
+  z-index: 1;
+  float: left;
+  width: 115px;
+  height: 30px;
+}
+
+select {
+  padding: 5px;
+  border:0px;
+  border-bottom: 2px solid #c09ad9;
+  outline:0px;
+  background: #1d1e21;
+  color: #d3d3d3;
+  font-size: 18px;
+  font-family: "Courier New";
+  width: 115px;
+}
+
+select option{
+  border:0px;
+  outline:0px;
+}
+
+.custom-icon{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 20px;
+  height: 100%;
+  background-color: #1d1e21;
+  pointer-events: none;
+}
+
+.custom-icon::before{
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #c09ad9;
+  top: 40%;
+  left: 23%;
+}
 
 div.feedback{
   margin-right: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
-  margin-left: 105px;
+  margin-left: 31px;
   border: 3px solid #c09ad9;
   border-radius: 15px;
   flex-grow: 1;
-}
-
-div.leftside{
-  margin: 0px;
-  width: 140px;
-}
-
-div.middle{
-  user-select: none;
-  z-index: 1;
-  float: left;
-  width: 50px;
-  height: 130px;
 }
 
 div.log{
@@ -185,7 +228,7 @@ div.log{
 
 }
 
-div.watermarkbcimacunt {
+div.watermark {
   position: absolute;
   margin-left: 540px;
   margin-top: 23px;
@@ -201,24 +244,4 @@ a {
 a:visited {
   color: #d3d3d3;
   text-decoration: none;
-}
-
-select {
-  margin-left: 4px;
-  margin-top: 89px;
-  padding: 5px;
-  border:0px;
-  border-bottom: 2px solid #c09ad9;
-  outline:0px;
-  background: #1d1e21;
-  color: #d3d3d3;
-  font-size: 18px;
-  font-family: "Courier New";
-  width: 115px;
-}
-
-select option{
-  border:0px;
-  outline:0px;
-  background: #1d1e21;
 }
