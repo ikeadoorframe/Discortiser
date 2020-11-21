@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Discortiser</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+  </head>
+  <body>
+    <div class="everything">
+      <div class="leftside">
+        <form action="">
+          <div class="input-field">
+            <input name="invite" type="text" id="server_invite" required />
+            <label for="server_invite">Server Invite:</label>
+          </div>
+          <div class="limit-field">
+            <input onkeyup="this.value=this.value.replace(/[^\d]/,'')" id="post_delay" required />
+            <label for="post_delay">Post Delay:</label>
+          </div>
+        </form>
+        <div class="buttons">
+          <table style="width: 100%;"></table>
+          <tr><th><button class="configbuttons" onclick="OpenAds();" readonly>Configure ads</button></th>
+          <th><button class="configbuttons" onclick="OpenAccounts();" readonly>Configure accounts</button></th></tr>
+          <button class="startbutton" onclick="StartButton();" readonly>Start</button>
+        </div>
+      </div>
+      <div class='middle'>
+
+        <select id="delay_type">
+          <option value="Hours">Hours</option>
+          <option value="Minutes">Minutes</option>
+        </select>
+      </div>
+      <div class="feedback">
+        <div class="log">
+          Output Log
+          </div>
+        <textarea class="logtext" id="ConsoleLog" rows=16 cols=46 autofocus readonly></textarea>
+      </div>
+      <div class=watermarkbcimacunt><a href="https://www.youtube.com/channel/UCniLjcDxUrhH9MnVhoCIizA" target="popup">by ikeadoorframe</a></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,224 @@
+body{
+  background: #1d1e21;
+}
+
+div.everything{
+  margin: 0px;
+  width: 675px;
+  height: 250px;
+  display:flex;
+}
+
+form {
+  margin: 15px;
+  margin-bottom: 5px;
+}
+.input-field {
+  margin-top: 20px;
+  color: #d3d3d3;
+  position: relative;
+  width: 293px;
+  height: 44px;
+  line-height: 44px;
+  user-select: none;
+}
+
+.limit-field {
+  margin-top: 20px;
+  color: #d3d3d3;
+  position: relative;
+  width: 138px;
+  height: 44px;
+  line-height: 44px;
+  user-select: none;
+}
+
+label {
+  font-family: "Courier New";
+  font-weight: 520;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #d3d3d3;
+  transition: 0.2s all;
+  cursor: text;
+}
+
+input {
+  font-family: "Courier New";
+  font-size: 18px;
+  font-weight: 520;
+  color: #d3d3d3;
+  background-color: transparent;
+  width: 83%;
+  border: 0;
+  outline: 0;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid #c09ad9;
+  box-shadow: none;
+}
+input:focus{
+  border-bottom: 2px solid #c09ad9;
+}
+input:focus~label,
+input:valid~label {
+  font-size: 14px;
+  top: -24px;
+  color: #d3d3d3;
+
+}
+div.buttons{
+  user-select: none;
+  position: absolute;
+  z-index: 2;
+  margin-top: 0px;
+  margin-left: 10px;
+  width: 280px;
+  user-select: none;
+}
+
+.startbutton{
+  color: #d3d3d3;
+  outline: 0;
+  margin: 5px;
+  margin-top: 10px;
+  height: 41px;
+  width: 245px;
+  background-color: transparent;
+  border: 3px solid #c09ad9;
+  border-radius: 10px;
+  font-family: "Courier New";
+  font-size: 18px;
+  font-weight: 520;
+  transition-duration: 0.3s;
+}
+
+.configbuttons{
+  color: #d3d3d3;
+  outline: 0;
+  margin: 5px;
+  height: 41px;
+  width: 115px;
+  background-color: transparent;
+  border: 3px solid #c09ad9;
+  border-radius: 10px;
+  font-family: "Courier New";
+  font-size: 14px;
+  font-weight: 520;
+  transition-duration: 0.3s;
+}
+
+.configbuttons:hover{
+  background-color: rgba(255, 255, 255, 0.2);
+  user-select: none;
+}
+
+.startbutton:hover{
+  background-color: rgba(255, 255, 255, 0.2);
+  user-select: none;
+}
+
+
+div.feedback{
+  margin-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 105px;
+  border: 3px solid #c09ad9;
+  border-radius: 15px;
+  flex-grow: 1;
+}
+
+div.leftside{
+  margin: 0px;
+  width: 140px;
+}
+
+div.middle{
+  user-select: none;
+  z-index: 1;
+  float: left;
+  width: 50px;
+  height: 130px;
+}
+
+div.log{
+  margin: 5px;
+  margin-left: 10px;
+  font-size: 11px;
+  font-family: "Courier New";
+  color: #d3d3d3;
+  user-select: none;
+}
+
+.logtext{
+  resize: none;
+  width: 345px;
+  height: 180px;
+  outline: 0px;
+  border: 0px;
+  color: #9DE2DD;
+  font-size: 14px;
+  font-family: "Courier New";
+  margin-left: 5px;
+  background-color: transparent;
+}
+
+.logtext::-webkit-scrollbar {
+  width: 5px;
+  cursor: pointer;
+}
+
+/* Track */
+.logtext::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.logtext::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+.logtext::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+
+}
+
+div.watermarkbcimacunt {
+  position: absolute;
+  margin-left: 540px;
+  margin-top: 23px;
+  font-size: 11px;
+  font-family: "Courier New";
+}
+
+a {
+  color: #d3d3d3;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #d3d3d3;
+  text-decoration: none;
+}
+
+select {
+  margin-left: 4px;
+  margin-top: 89px;
+  padding: 5px;
+  border:0px;
+  border-bottom: 2px solid #c09ad9;
+  outline:0px;
+  background: #1d1e21;
+  color: #d3d3d3;
+  font-size: 18px;
+  font-family: "Courier New";
+  width: 115px;
+}
+
+select option{
+  border:0px;
+  outline:0px;
+  background: #1d1e21;
+}
