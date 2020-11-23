@@ -276,7 +276,7 @@ def FiveAccounts():
         eel.sleep(delay)
 
 #Make directories if they dont already exist
-if not os.path.isfile("data/AccountConfig.txt"):
+if not os.path.isfile("praw.ini"):
     subprocess.call('buildprawini.py', shell=True, cwd='subprocesses/')
     eel.sendLog("Created praw.ini.\n")
 
