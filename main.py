@@ -2,49 +2,10 @@ import eel
 import os
 import subprocess
 import json
+import praw
+import random
 
 eel.init("web")
-
-jsonfile = """{
-  "first_account":{
-    "CLIENT_ID":"",
-    "CLIENT_SECRET":"",
-    "USERNAME":"",
-    "PASSWORD":""
-  },
-  "second_account":{
-    "CLIENT_ID":"",
-    "CLIENT_SECRET":"",
-    "USERNAME":"",
-    "PASSWORD":""
-  },
-  "third_account":{
-    "CLIENT_ID":"",
-    "CLIENT_SECRET":"",
-    "USERNAME":"",
-    "PASSWORD":""
-  },
-  "fourth_account":{
-    "CLIENT_ID":"",
-    "CLIENT_SECRET":"",
-    "USERNAME":"",
-    "PASSWORD":""
-  },
-  "fifth_account":{
-    "CLIENT_ID":"",
-    "CLIENT_SECRET":"",
-    "USERNAME":"",
-    "PASSWORD":""
-  }
-}
-"""
-AdsText = """Ads are chosen at random.
-Use a new ad in every line:
-ad #1
-ad #2
-ad #3
-If you are using multiple accounts, it's best to have more ads."""
-
 
 @eel.expose
 def OpenAccounts():
@@ -56,9 +17,72 @@ def OpenAds():
     #Open ad list
     subprocess.Popen("data\\AdList.txt", shell=True)
 
-#There is probably and easier way of doing this but idk it
+@eel.expose
+def CheckInputs(server_invite, post_delay, delay_type):
+    global invite
+    global delay
+    invite = server_invite
+
+    #Check invite link
+    if server_invite == "":
+        eel.sendLog("Invalid server invite.\n")
+        return
+    #Check delay
+    if (post_delay == "" or post_delay == "0"):
+        eel.sendLog("Invalid post delay.\n")
+        return
+
+    try:
+        pd = int(post_delay) #convert to integer
+
+    except ValueError:
+        eel.sendLog("Invalid post delay.\n")
+        return
+
+    if delay_type == "Minutes":
+        if pd < 15 :
+            eel.sendLog("Minumum delay is 15 minutes.\n")
+            return
+        delay = pd * 60 #Convert to minutes
+
+    if delay_type == "Hours":
+        delay = pd * 60 * 60 #Convert to hours
+
+    if (delay_type == "Hours" and post_delay == "1"):
+        eel.sendLog("Delay set to: " + post_delay + " hour.\n")
+
+    else:
+        eel.sendLog("Delay set to: " + post_delay + " " + delay_type.lower() +".\n")
+
+    #Check how many accounts are in use
+    CheckAccounts()
+    if a == 0:
+        eel.sendLog("\n[ERROR] No accounts detected\nConfigure accounts and retry.\n")
+
+    elif a == 1:
+        eel.sendLog("\nProceeding with one account.\n")
+        OneAccount()
+
+    elif a == 2:
+        eel.sendLog("\nProceeding with two accounts.\n")
+        TwoAccounts()
+
+    elif a == 3:
+        eel.sendLog("\nProceeding with three accounts.\n")
+        ThreeAccounts()
+
+    elif a == 4:
+        eel.sendLog("\nProceeding with four accounts.\n")
+        FourAccounts()
+
+    elif a == 5:
+        eel.sendLog("\nProceeding with five accounts.\n")
+        FiveAccounts()
+
+#this could be a seperate file but cbs setting it up
 def CheckAccounts():
-    with open("data\\AccountConfig.txt") as json_file:
+    global a
+    with open("data/AccountConfig.txt") as json_file:
         data = json.load(json_file)
     if data["first_account"]["CLIENT_ID"] == "":
         a = 0
@@ -67,98 +91,200 @@ def CheckAccounts():
         if not data["first_account"]["CLIENT_SECRET"] == "":
             if not data["first_account"]["USERNAME"] == "":
                 if not data["first_account"]["PASSWORD"] == "":
-                    eel.sendLog("First account loaded\n")
+                    global account_one
+                    global account_one_username
+                    account_one = praw.Reddit(
+                                            client_id=data["first_account"]["CLIENT_ID"],
+                                            client_secret=data["first_account"]["CLIENT_SECRET"],
+                                            username=data["first_account"]["USERNAME"],
+                                            password=data["first_account"]["PASSWORD"],
+                                            user_agent='iloveikea')
+
+                    account_one_username = data["first_account"]["USERNAME"]
+                    eel.sendLog("First account loaded.\n")
                     a = 1
 
     if not data["second_account"]["CLIENT_ID"] == "":
         if not data["second_account"]["CLIENT_SECRET"] == "":
             if not data["second_account"]["USERNAME"] == "":
                 if not data["second_account"]["PASSWORD"] == "":
-                    eel.sendLog("Second account loaded\n")
+                    global account_two
+                    global account_two_username
+                    account_two = praw.Reddit(
+                                            client_id=data["second_account"]["CLIENT_ID"],
+                                            client_secret=data["second_account"]["CLIENT_SECRET"],
+                                            username=data["second_account"]["USERNAME"],
+                                            password=data["second_account"]["PASSWORD"],
+                                            user_agent='iloveikea')
+
+                    account_two_username = data["second_account"]["USERNAME"]
+                    eel.sendLog("Second account loaded.\n")
                     a = 2
 
     if not data["third_account"]["CLIENT_ID"] == "":
         if not data["third_account"]["CLIENT_SECRET"] == "":
             if not data["third_account"]["USERNAME"] == "":
                 if not data["third_account"]["PASSWORD"] == "":
-                    eel.sendLog("Third account loaded\n")
+                    global account_three
+                    global account_three_username
+                    account_three = praw.Reddit(
+                                            client_id=data["third_account"]["CLIENT_ID"],
+                                            client_secret=data["third_account"]["CLIENT_SECRET"],
+                                            username=data["third_account"]["USERNAME"],
+                                            password=data["third_account"]["PASSWORD"],
+                                            user_agent='iloveikea')
+
+                    account_three_username = data["third_account"]["USERNAME"]
+                    eel.sendLog("Third account loaded.\n")
                     a = 3
 
     if not data["fourth_account"]["CLIENT_ID"] == "":
         if not data["fourth_account"]["CLIENT_SECRET"] == "":
             if not data["fourth_account"]["USERNAME"] == "":
                 if not data["fourth_account"]["PASSWORD"] == "":
-                    eel.sendLog("Fourth account loaded\n")
+                    global account_four
+                    global account_four_username
+                    account_four = praw.Reddit(
+                                            client_id=data["fourth_account"]["CLIENT_ID"],
+                                            client_secret=data["fourth_account"]["CLIENT_SECRET"],
+                                            username=data["fourth_account"]["USERNAME"],
+                                            password=data["fourth_account"]["PASSWORD"],
+                                            user_agent='iloveikea')
+
+                    account_four_username = data["fourth_account"]["USERNAME"]
+                    eel.sendLog("Fourth account loaded.\n")
                     a = 4
 
     if not data["fifth_account"]["CLIENT_ID"] == "":
         if not data["fifth_account"]["CLIENT_SECRET"] == "":
             if not data["fifth_account"]["USERNAME"] == "":
                 if not data["fifth_account"]["PASSWORD"] == "":
-                    eel.sendLog("Fifth account loaded\n")
+                    global account_five
+                    global account_five_username
+                    account_five = praw.Reddit(
+                                            client_id=data["fifth_account"]["CLIENT_ID"],
+                                            client_secret=data["fifth_account"]["CLIENT_SECRET"],
+                                            username=data["fifth_account"]["USERNAME"],
+                                            password=data["fifth_account"]["PASSWORD"],
+                                            user_agent='iloveikea')
+
+                    account_five_username = data["fifth_account"]["USERNAME"]
+                    eel.sendLog("Fifth account loaded.\n")
                     a = 5
-    return a
+    return a #i dont think this is needed but im leaving it bc the script works
 
-@eel.expose
-def main(server_invite, post_delay, delay_type):
-    #Check invite link and delay
-    if server_invite == "":
-        eel.sendLog("Invalid server invite\n")
-        return
+#############POSTING FUNCTIONS#########################################
+def RandomTitle():
+    with open('data/AdList.txt') as t:
+        global title
+        ads = t.readlines()
+        rawlines = [line.replace('\n', '') for line in ads]
+        title = random.choice(rawlines)
 
-    if post_delay == "":
-        eel.sendLog("Invalid post delay\n")
-        return
+def OneAccount():
+    eel.sendLog('Ads will continue to be posted as long as window is open.\n')
+    while True:
+        RandomTitle()
+        account_one.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_one_username + " with ad: " + title)
+        eel.sleep(delay)
 
-    #Always things delay is too short
-    if delay_type == "Minutes":
-        if post_delay == "0" or "1" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "10" or "11" or "12" or "13" or "14":
-            eel.sendLog("Minumum delay is 15 minutes\n")
-            return
+def TwoAccounts():
+    eel.sendLog('Ads will continue to be posted as long as window is open.\n')
+    while True:
+        #use first account
+        RandomTitle()
+        account_one.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_one_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use second account
+        RandomTitle()
+        account_two.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_two_username + " with ad: " + title)
+        eel.sleep(delay)
 
-    #says a is not defined
-    #Check how many accounts are in use
-    CheckAccounts()
-    if a == 0:
-        eel.sendLog("No accounts detected\nConfigure accounts and retry\n")
+def ThreeAccounts():
+    eel.sendLog('Ads will continue to be posted as long as window is open.\n')
+    while True:
+        #use first account
+        RandomTitle()
+        account_one.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_one_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use second account
+        RandomTitle()
+        account_two.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_two_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use third account
+        RandomTitle()
+        account_three.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_three_username + " with ad: " + title)
+        eel.sleep(delay)
 
-    elif a == 1:
-        eel.sendLog("\nProceeding with one account\n")
-        #start script with 1 acc
+def FourAccounts():
+    eel.sendLog('Ads will continue to be posted as long as window is open.\n')
+    while True:
+        #use first account
+        RandomTitle()
+        account_one.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_one_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use second account
+        RandomTitle()
+        account_two.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_two_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use third account
+        RandomTitle()
+        account_three.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_three_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use fourth account
+        RandomTitle()
+        account_four.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_four_username + " with ad: " + title)
+        eel.sleep(delay)
 
-    elif a == 2:
-        eel.sendLog("\nProceeding with two accounts\n")
-        #start script with 2 accs
-
-    elif a == 3:
-        eel.sendLog("\nProceeding with three accounts\n")
-        #start script with 3 accs
-
-    elif a == 4:
-        eel.sendLog("\nProceeding with four accounts\n")
-        #start script with 4 accs
-
-    elif a == 5:
-        eel.sendLog("\nProceeding with five accounts\n")
-        #start script with 5 accs
-
+def FiveAccounts():
+    eel.sendLog('Ads will continue to be posted as long as window is open.\n')
+    while True:
+        #use first account
+        RandomTitle()
+        account_one.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_one_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use second account
+        RandomTitle()
+        account_two.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_two_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use third account
+        RandomTitle()
+        account_three.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_three_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use fourth account
+        RandomTitle()
+        account_four.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_four_username + " with ad: " + title)
+        eel.sleep(delay)
+        #use fifth account
+        RandomTitle()
+        account_five.subreddit('discordservers').submit(title, url=invite)
+        eel.sendLog("Posted to r/discordservers using: " + account_five_username + " with ad: " + title)
+        eel.sleep(delay)
 
 #Make directories if they dont already exist
 if not os.path.isdir("data"):
     os.mkdir("data")
 
 if not os.path.isfile("data/AccountConfig.txt"):
-    acc = open("data/AccountConfig.txt", "w")
-    acc.write(jsonfile)
-    acc.close()
-    eel.sendLog("Created data/AccountConfig.txt\n")
+    subprocess.call('buildAccountConfig.py', shell=True, cwd='subprocesses/')
+    eel.sendLog("Created data/AccountConfig.txt.\n")
 
 if not os.path.isfile("data/AdList.txt"):
-    ads = open("data/AdList.txt", "w")
-    ads.write(AdsText)
-    ads.close()
-    eel.sendLog("Created data/AdList.txt\n")
-
-
+    subprocess.call('buildAdList.py', shell=True, cwd='subprocesses/')
+    eel.sendLog("Created data/AdList.txt.\n")
 
 eel.start("main.html", size=(705, 305))

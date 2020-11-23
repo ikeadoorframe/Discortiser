@@ -1,4 +1,6 @@
-{
+import os.path
+
+jsonfile = """{
   "first_account":{
     "CLIENT_ID":"",
     "CLIENT_SECRET":"",
@@ -30,3 +32,9 @@
     "PASSWORD":""
   }
 }
+"""
+
+acc = open("../data/AccountConfig.txt", "w")
+acc.write(jsonfile)
+acc.close()
+exit()
