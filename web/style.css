@@ -52,7 +52,7 @@ input {
   border: 0;
   outline: 0;
   padding: 0.3rem 0;
-  border-bottom: 2px solid #c09ad9;
+  border-bottom: 2px solid #C497D8;
   box-shadow: none;
 
   font-family: "Courier New";
@@ -62,7 +62,7 @@ input {
 }
 
 input:focus{
-  border-bottom: 2px solid #c09ad9;
+  border-bottom: 2px solid #C497D8;
 }
 
 input:focus~label,
@@ -84,7 +84,7 @@ div.buttons{
   margin: 5px;
   width: 115px;
   height: 41px;
-  border: 3px solid #c09ad9;
+  border: 3px solid #C497D8;
   border-radius: 10px;
   outline: 0;
   background-color: transparent;
@@ -105,7 +105,7 @@ div.buttons{
   margin: 10px 5px 5px 5px;
   width: 245px;
   height: 41px;
-  border: 3px solid #c09ad9;
+  border: 3px solid #C497D8;
   border-radius: 10px;
   outline: 0;
   background-color: transparent;
@@ -136,7 +136,7 @@ select {
   padding: 5px;
   width: 115px;
   border:0px;
-  border-bottom: 2px solid #c09ad9;
+  border-bottom: 2px solid #C497D8;
   outline:0px;
   background: #1d1e21;
 
@@ -169,12 +169,12 @@ select option{
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 7px solid #c09ad9;
+  border-top: 7px solid #C497D8;
 }
 
 div.feedback{
   margin: 15px 15px 15px 31px;
-  border: 3px solid #c09ad9;
+  border: 3px solid #C497D8;
   border-radius: 15px;
   flex-grow: 1;
 }
@@ -199,7 +199,7 @@ div.log{
 
   font-family: "Courier New";
   font-size: 14px;
-
+  color: #6AC1B0;
 }
 
 .logtext::-webkit-scrollbar {
